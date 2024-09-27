@@ -5,11 +5,11 @@ namespace InventoryManagementSystem.Models
 {
 	public class ERPDbContext : IdentityDbContext<ApplicationUser>
 	{
-		
+
 
 		public ERPDbContext(DbContextOptions options) : base(options)
 		{
-		
+
 		}
 		public DbSet<SalesOrderDetail> salesOrderDetails { get; set; } = default!;
 		public DbSet<SalesOrder> salesOrders { get; set; } = default!;
@@ -19,10 +19,6 @@ namespace InventoryManagementSystem.Models
 		public DbSet<Supplier> suppliers { get; set; } = default!;
 		public DbSet<Product> products { get; set; } = default!;
 		public DbSet<Category> categories { get; set; } = default!;
-
-
-
-
 
 
 
