@@ -8,8 +8,8 @@ namespace InventoryManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string CategoryName { get; set; }
-		public string Description { get; set; }
+        public string? CategoryName { get; set; }
+		public string? Description { get; set; }
 
 	}
 
@@ -18,13 +18,13 @@ namespace InventoryManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string ProductName { get; set; }
+        public string? ProductName { get; set; }
 		public int? StockLevel { get; set; }
 		public decimal? UnitPrice { get; set; }
-		public string Description { get; set; }
+		public string? Description { get; set; }
 
 		public int? CategoryId { get; set; }
-		public Category Category { get; set; }
+		public Category? Category { get; set; }
 
 	}
 
@@ -33,8 +33,8 @@ namespace InventoryManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string SupplierName { get; set; }
-		public string ContactInfo { get; set; }
+        public string? SupplierName { get; set; }
+		public string? ContactInfo { get; set; }
 
 	}
 	public class PurchaseOrder 
@@ -44,12 +44,12 @@ namespace InventoryManagementSystem.Models
         public int Id { get; set; }
         public DateTime? OrderDate { get; set; }
 		public decimal? TotalAmount { get; set; }
-		public string Status { get; set; }
+		public int? Status { get; set; }
 
 		public int? SupplierId { get; set; }
-		public Supplier Supplier { get; set; }
+		public Supplier? Supplier { get; set; }
 
-	}
+    }
 
 	public class PurchaseOrderDetail
 	{
@@ -62,10 +62,10 @@ namespace InventoryManagementSystem.Models
 		public decimal? TotalPrice { get; set; }
 
 		public int? PurchaseOrderId { get; set; }
-		public PurchaseOrder PurchaseOrder { get; set; }
+		public PurchaseOrder? PurchaseOrder { get; set; }
 
 		public int? ProductId { get; set; }
-		public Product Product { get; set; }
+		public Product? Product { get; set; }
 	}
 
 	public class Customer 
@@ -73,8 +73,8 @@ namespace InventoryManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string CustomerName { get; set; }
-		public string ContactInfo { get; set; }
+        public string? CustomerName { get; set; }
+		public string? ContactInfo { get; set; }
 
 	}
 	public class SalesOrder 
@@ -82,13 +82,12 @@ namespace InventoryManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int SalesOrderId { get; set; }
-		public DateTime OrderDate { get; set; }
-		public decimal TotalAmount { get; set; }
-		public string Status { get; set; }
+		public DateTime? OrderDate { get; set; }
+		public decimal? TotalAmount { get; set; }
+		public int? Status { get; set; }
 
 		public int? CustomerId { get; set; }
-		public Customer Customer { get; set; }
+		public Customer? Customer { get; set; }
 
 	}
 
@@ -103,10 +102,10 @@ namespace InventoryManagementSystem.Models
 		public decimal? TotalPrice { get; set; }
 
 		public int? SalesOrderId { get; set; }
-		public SalesOrder SalesOrder { get; set; }
+		public SalesOrder? SalesOrder { get; set; }
 
 		public int? ProductId { get; set; }
-		public Product Product { get; set; }
+		public Product? Product { get; set; }
 	}
 
 }

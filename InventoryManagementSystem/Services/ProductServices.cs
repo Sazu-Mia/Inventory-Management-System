@@ -30,5 +30,21 @@ namespace InventoryManagementSystem.Services
         {
             return await _context.products.Include(x=> x.Category).AsNoTracking().ToListAsync();
         }
+
+        public async Task<Product> GetProductById(int? productId)
+        {
+            var product = await _context.products
+                .Include(x => x.Category)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == productId);
+
+            if (product == null)
+            {
+                throw new Exception($"Product with Id {productId} not found.");
+            }
+
+            return product;
+        }
+
     }
 }

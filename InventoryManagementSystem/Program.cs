@@ -14,6 +14,7 @@ builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
 builder.Services.AddScoped<ISupplierServices, SupplierServices>();
 builder.Services.AddScoped<ICustomerServices, CustomerServices>();
+builder.Services.AddScoped<IPurchaseOrderServices, PurchaseOrderServices>();
 
 var app = builder.Build();
 

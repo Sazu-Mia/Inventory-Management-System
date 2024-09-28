@@ -3,20 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OnnoRokom</title>
+    <title>@ViewData["Title"] - Inventory Management System</title>
+
+    <!-- Bootstrap CSS -->
+    @* <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" /> *@
+
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+    <!-- jQuery UI CSS for DatePicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/InventoryManagementSystem.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    
-
-    @* <link href="~/SweetAlert/sweetalert2/sweetalert2.css" rel="stylesheet" /> *@
-
-    @* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" /> *@
 
     <style>
-
         body {
             font-size: 11pt !important;
             color: black !important;
@@ -24,11 +30,10 @@
 
         table .btn {
             font-size: 8pt !important;
-            padding: 3px 5px 3px 5px !important;
+            padding: 3px 5px !important;
         }
 
         table th, table td {
-            /*padding: 2px 2px 2px 2px !important;*/
             color: black !important;
             font-weight: normal !important;
         }
@@ -36,7 +41,6 @@
         .col-form-label {
             color: #606066 !important;
             font-weight: normal !important;
-            padding: 0 0 0 0;
         }
 
         .form-control {
@@ -57,44 +61,12 @@
             margin-bottom: 5px;
         }
 
-            .dropdown-item .fas {
-                margin-top: 0;
-                font-size: 13px;
-            }
-
             .dropdown-item:hover {
-                background: linear-gradient(90deg, gray 35%, #E5EEEF 100%, #364E6F 50%, #FFF29D 50%) !important;
+                background: linear-gradient(90deg, gray 35%, #E5EEEF 100%) !important;
             }
-
-        input, select {
-            box-shadow: none !important;
-        }
-
 
         .form-group {
             margin-bottom: 6px !important;
-        }
-
-        @@media (max-width: 768px) {
-            #menu {
-                /* width:0 !important; */
-                overflow: hidden;
-                transition: width 0.3s ease;
-            }
-
-            #content-wrapper {
-                /* 	margin-left: 0 !important; */
-                transition: margin-left 0.3s ease;
-            }
-
-            #softLogo {
-                height: 40px !important;
-            }
-
-            #softTitle {
-                font-size: 10pt !important;
-                width: auto;
-            }
         }
 
         #menu .navbar-nav {
@@ -103,10 +75,9 @@
         }
 
             #menu .navbar-nav::-webkit-scrollbar {
-                width: 0; /* Remove scrollbar space */
-                background: transparent; /* Optional: just make scrollbar invisible */
+                width: 0;
+                background: transparent;
             }
-
     </style>
 
     @RenderSection("Style", required: false)
@@ -116,9 +87,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">InventoryManagementSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inventory Management System</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -138,25 +109,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
                         </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        @* <div id="page-top">
-            <div id="wrapper">
-                <div id="menu" style="position: fixed; overflow: hidden; height: 100%; width: 238px; top: 0; left: 0; z-index: 0; padding-top: 65px;">
-                    <ul class="navbar-nav sidebar sidebar-dark accordion" style="font-weight: bolder; background:#0f5731;" id="accordionSidebar">
-                        <li class="nav-item" id="menu_dashboard">
-                            <a class="nav-link" href="/HRPMSEmployee/Dashboard/HRDashboard" id="HomeIcon1">
-                                <i class="fas fa-fw fa-home"></i>
-                                <span style="color:white;" id="dashboard">Dashboard</span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </div> *@
+        </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -165,18 +126,30 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - InventoryManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - Inventory Management System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI for DatePicker -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <!-- Bootstrap JS -->
+@*     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+ *@
+    <!-- Custom JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Initialize DataTable and DatePicker -->
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    @* <script src="~/"></script> *@
-    
-
-
+   
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

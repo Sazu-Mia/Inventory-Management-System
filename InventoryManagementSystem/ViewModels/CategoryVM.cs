@@ -15,9 +15,16 @@ namespace InventoryManagementSystem.ViewModels
         public string SupplierName { get; set; }
         public string ContactInfo { get; set; }
         public string CustomerName { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public decimal? TotalAmount { get; set; }
+        public string Status { get; set; }
+
+        public int? SupplierId { get; set; }
+        public int? productId { get; set; }
         public IEnumerable<Category> categories { get; set; }
 		public IEnumerable<Product> products { get; set; }
 		public IEnumerable<Supplier> suppliers { get; set; }
 		public IEnumerable<Customer> customers { get; set; }
+		public IEnumerable<PurchaseOrder> purchaseOrders { get; set; }
 	}
 }

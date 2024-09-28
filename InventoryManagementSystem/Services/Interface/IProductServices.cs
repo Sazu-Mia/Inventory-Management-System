@@ -6,5 +6,6 @@ namespace InventoryManagementSystem.Services.Interface
     {
         Task<int> SaveProduct(Product product);
         Task<IEnumerable<Product>> GetAllProduct();
+        Task<Product> GetProductById(int? productId);
     }
 }
