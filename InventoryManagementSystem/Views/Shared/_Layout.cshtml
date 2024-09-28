@@ -6,7 +6,9 @@
     <title>@ViewData["Title"] - Inventory Management System</title>
 
     <!-- Bootstrap CSS -->
-    @* <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/InventoryManagementSystem.styles.css" asp-append-version="true" />
 
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -16,11 +18,6 @@
 
     <!-- jQuery UI CSS for DatePicker -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/InventoryManagementSystem.styles.css" asp-append-version="true" />
 
     <style>
         body {
@@ -38,14 +35,11 @@
             font-weight: normal !important;
         }
 
-        .col-form-label {
+        .col-form-label, .form-control {
             color: #606066 !important;
-            font-weight: normal !important;
         }
 
         .form-control {
-            color: #606066 !important;
-            font-size: 10pt !important;
             padding: 1px 20px 1px 8px;
             border: 1px solid #606066;
             height: 30px;
@@ -56,7 +50,6 @@
             background: #ADD8E6 !important;
             font-size: 13px;
             width: 175px !important;
-            margin: 0 auto;
             border-radius: 30px;
             margin-bottom: 5px;
         }
@@ -69,69 +62,127 @@
             margin-bottom: 6px !important;
         }
 
-        #menu .navbar-nav {
-            max-height: 500px;
-            overflow: scroll;
+        #sidebar {
+            min-height: 100vh;
+            background-color: #343a40;
+            padding-top: 20px;
         }
 
-            #menu .navbar-nav::-webkit-scrollbar {
-                width: 0;
-                background: transparent;
+            #sidebar .nav-link {
+                color: white;
+            }
+
+                #sidebar .nav-link:hover {
+                    background-color: #495057;
+                }
+/* 
+        #main-content {
+            margin-left: 250px;
+        } */
+
+
+        #main-content {
+            width: 85% !important;
+        }
+
+       
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .navbar-light {
+            background-color: #0f5731 !important;
+        }
+
+        .navbar-collapse {
+            margin-left: 250px;
+        }
+
+            .navbar-collapse .navbar-nav .nav-link {
+                color: white !important;
             }
     </style>
 
     @RenderSection("Style", required: false)
-
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inventory Management System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Supplier" asp-action="Index">Supplier</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PurchaseOrder" asp-action="PurchaseProduct">Purchase Product</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="bg-dark">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Category" asp-action="Index">
+                        <i class="fas fa-list"></i> Category
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Product" asp-action="Index">
+                        <i class="fas fa-box"></i> Product
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Supplier" asp-action="Index">
+                        <i class="fas fa-truck"></i> Supplier
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Customer" asp-action="Index">
+                        <i class="fas fa-users"></i> Customer
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="PurchaseOrder" asp-action="Index">
+                        <i class="fas fa-receipt"></i> Purchase Order
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="PurchaseOrder" asp-action="PurchaseProduct">
+                        <i class="fas fa-cart-plus"></i> Purchase Product
+                    </a>
+                </li>
+            </ul>
         </nav>
-    </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <!-- Main content -->
+        <div id="main-content">
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom box-shadow mb-3">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">OnnoRokom Projukti Limited</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Inventory Management System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="container-fluid">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+
+            <footer class="border-top footer text-muted mt-3">
+                <div class="container">
+                    &copy; 2024 - Inventory Management System - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>
         </div>
-    </footer>
+    </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -143,17 +194,11 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
     <!-- Bootstrap JS -->
-@*     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
- *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Custom JS -->
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    <!-- Initialize DataTable and DatePicker -->
-
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/Common.js"></script>
-
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
