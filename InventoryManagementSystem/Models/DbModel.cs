@@ -42,6 +42,7 @@ namespace InventoryManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string? PurchaseOrderNo { get; set; }
         public DateTime? OrderDate { get; set; }
 		public decimal? TotalAmount { get; set; }
 		public int? Status { get; set; }
@@ -82,6 +83,7 @@ namespace InventoryManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string? SalesOrderNo { get; set; }
 		public DateTime? OrderDate { get; set; }
 		public decimal? TotalAmount { get; set; }
 		public int? Status { get; set; }

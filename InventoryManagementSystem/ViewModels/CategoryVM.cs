@@ -21,10 +21,22 @@ namespace InventoryManagementSystem.ViewModels
 
         public int? SupplierId { get; set; }
         public int? productId { get; set; }
+        public string? PurchaseOrderNo { get; set; }
+        public string? SalesOrderNo { get; set; }
+
+        public int? Quantity { get; set; }
+        public decimal? PricePerUnit { get; set; }
+
+        public decimal? TotalPrice { get; set; }
+
+        public int? PurchaseOrderId { get; set; }
+
+        public int? ProductId { get; set; }
         public IEnumerable<Category> categories { get; set; }
 		public IEnumerable<Product> products { get; set; }
 		public IEnumerable<Supplier> suppliers { get; set; }
 		public IEnumerable<Customer> customers { get; set; }
 		public IEnumerable<PurchaseOrder> purchaseOrders { get; set; }
+		public IEnumerable<PurchaseOrderDetail> orderDetails { get; set; }
 	}
 }

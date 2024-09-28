@@ -6,5 +6,8 @@ namespace InventoryManagementSystem.Services.Interface
     {
         Task<IEnumerable<PurchaseOrder>> GetAllPurchaseOrder();
         Task<int> SavePurchaseOrder(PurchaseOrder purchaseOrder);
+        Task<int?> GetMaxPurchaseOrderId();
+        Task<int> SavePurchaseOrderDetail(PurchaseOrderDetail purchaseOrderDetail);
+        Task<IEnumerable<PurchaseOrderDetail>> GetAllPurchaseOrderDetail();
     }
 }
