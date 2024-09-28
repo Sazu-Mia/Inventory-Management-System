@@ -1,0 +1,143 @@
+﻿@model CategoryVM
+
+
+@{
+    ViewData["TitleMD"] = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section Style {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <style>
+        label {
+            margin-left: 11px;
+        }
+
+        #categoryTable,
+        #categoryTable th,
+        #categoryTable td {
+            border: none !important;
+        }
+    </style>
+}
+
+<div class="card" style="width: 100%;">
+    <div class="card-header  d-flex flex-row align-items-center justify-content-between">
+        <h5 class="m-0 font-weight-bold text-primary"> Customer Information</h5>
+        <a class='btn btn-info mr-4' style="float:right" data-toggle='tooltip' title='Go Back' onclick="history.back()"><i class="fas fa-angle-double-left"> <span style="">Back</span></i></a>
+
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <form id="FormId" method="post" data-parsley-validate="parsley">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input type="hidden" class="form-control" name="editId" id="editId">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group row">
+                            <label for="CustomerName" class="col-sm-12 col-form-label">Customer Name</label>
+                            <div class="col-sm-12">
+                                <input type="text" data-parsley-required="ture" class="form-control" name="CustomerName" id="CustomerName">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+
+                        <div class="form-group row">
+                            <label for="ContactInfo" class="col-sm-12 col-form-label">Contact Info</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="ContactInfo" id="ContactInfo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr>
+                <button type="submit" id="submitbtn" value="Submit" class="btn btn-success btn-lg" style="float:right; margin-top:5px;display:none;" data-toggle='tooltip' title='Save'><i class="fas fa-save"></i></button>
+                <button type="button" id="submit" value="Submit" class="btn btn-success " style="float:right; margin-top:5px;" data-toggle='tooltip' title='Save'><i class="fas fa-save"></i> Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row clearfix">
+    <div class="col-12">
+        <div class="card mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Customer List</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table table-striped" id="categoryTable">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Contact Info</th>
+                            <th>Action</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.customers)
+                        {
+                            <tr>
+                                <td>@item.CustomerName</td>
+                                <td>@item.ContactInfo</td>
+
+                                <td>
+                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.CustomerName', '@item.ContactInfo')">
+                                        <i class="fa fa-edit fa-sm"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#categoryTable").DataTable();
+        });
+
+
+        $("#submit").click(function () {
+            var data = $("#FormId").serialize();
+            Swal.fire({
+                title: 'Are you sure?', text: 'Do you want to submit this record!', type: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, submit it!'
+            }).then(function () {
+                $.ajax({
+                    url: '@Url.Action("Index", "Customer")',
+                    type: 'POST',
+                    data: data
+                }).done(function () {
+                    Swal.fire('Success!', 'Data Saved Successfully', 'success').then(function () {
+                        location.reload();
+                    })
+                }).fail(function () {
+                    Swal.fire('Error!', 'Something Went Wrong', 'error').then(function () {
+                        location.reload();
+                    })
+                })
+            });
+        });
+
+
+        function Edit(Id, CustomerName, ContactInfo) {
+            $("#editId").val(Id);
+            $("#CustomerName").val(CustomerName);
+            $("#ContactInfo").val(ContactInfo);
+        }
+
+    </script>
+}
