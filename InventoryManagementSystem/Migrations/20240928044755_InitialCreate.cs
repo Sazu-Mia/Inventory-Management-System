@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InventoryManagementSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,12 +59,7 @@ namespace InventoryManagementSystem.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,12 +73,7 @@ namespace InventoryManagementSystem.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    ContactInfo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,12 +87,7 @@ namespace InventoryManagementSystem.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    ContactInfo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,12 +210,7 @@ namespace InventoryManagementSystem.Migrations
                     StockLevel = table.Column<int>(type: "int", nullable: true),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,12 +232,7 @@ namespace InventoryManagementSystem.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -278,12 +253,7 @@ namespace InventoryManagementSystem.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SupplierId = table.Column<int>(type: "int", nullable: true),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    SupplierId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -305,12 +275,7 @@ namespace InventoryManagementSystem.Migrations
                     PricePerUnit = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     SalesOrderId = table.Column<int>(type: "int", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -337,12 +302,7 @@ namespace InventoryManagementSystem.Migrations
                     PricePerUnit = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PurchaseOrderId = table.Column<int>(type: "int", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
-                    isDelete = table.Column<int>(type: "int", nullable: true),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createdBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    updatedBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

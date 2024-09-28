@@ -7,25 +7,25 @@
 
 }
 
-@section Style{
+@section Style {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
-   <style>
-       label{
-           margin-left: 11px;
-       }
+    <style>
+        label {
+            margin-left: 11px;
+        }
 
         #categoryTable,
         #categoryTable th,
         #categoryTable td {
             border: none !important;
         }
-   </style>
+    </style>
 }
 
 <div class="card" style="width: 100%;">
     <div class="card-header  d-flex flex-row align-items-center justify-content-between">
-        <h5 class="m-0 font-weight-bold text-primary"> Category Information</h5>
-        <a class='btn btn-info mr-4' style="float:right" data-toggle='tooltip' title='Go Back' onclick="history.back()" ><i class="fas fa-angle-double-left"> <span style="">Back</span></i></a>
+        <h5 class="m-0 font-weight-bold text-primary"> Product Information</h5>
+        <a class='btn btn-info mr-4' style="float:right" data-toggle='tooltip' title='Go Back' onclick="history.back()"><i class="fas fa-angle-double-left"> <span style="">Back</span></i></a>
 
     </div>
     <div class="card-body">
@@ -38,17 +38,41 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group row">
-                            <label for="branchName" class="col-sm-12 col-form-label">Category Name</label>
+                            <label for="ProductName" class="col-sm-12 col-form-label">Product Name</label>
                             <div class="col-sm-12">
-                                <input type="text" data-parsley-required="ture" class="form-control" name="CategoryName" id="CategoryName">
+                                <input type="text" data-parsley-required="ture" class="form-control" name="ProductName" id="ProductName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="UnitPrice" class="col-sm-12 col-form-label">Unit Price</label>
+                            <div class="col-sm-12">
+                                <input type="text" data-parsley-required="ture" class="form-control" name="UnitPrice" id="UnitPrice">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="branchNamebn" class="col-sm-12 col-form-label">Description</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="Description" id="Description">
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group row">
-                            <label for="branchNamebn" class="col-sm-12 col-form-label">Description</label>
+                            <label for="CategoryId" class="col-sm-12 col-form-label">Category</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" name="Description" id="Description">
+                                <select class="form-control" name="CategoryId" id="CategoryId">
+                                    <option value="0">Select</option>
+                                    @foreach(var item in Model.categories)
+                                    {
+                                        <option value="@item.Id">@item.CategoryName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="StockLevel" class="col-sm-12 col-form-label">Stock</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="StockLevel" id="StockLevel">
                             </div>
                         </div>
                     </div>
@@ -75,19 +99,25 @@
                 <table class="table table-striped" id="categoryTable">
                     <thead>
                         <tr>
-                            <th>Category Name</th>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Unit Price</th>
+                            <th>Stock</th>
                             <th>Description</th>
-                           
+
                             <th>Action</th>
                     </thead>
                     <tbody>
-                        @foreach(var item in Model.categories)
+                        @foreach (var item in Model.products)
                         {
                             <tr>
-                                <td>@item.CategoryName</td>
+                                <td>@item.ProductName</td>
+                                <td>@item.Category?.CategoryName</td>
+                                <td>@item.UnitPrice</td>
+                                <td>@item.StockLevel</td>
                                 <td>@item.Description</td>
                                 <td>
-                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.CategoryName', '@item.Description')">
+                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.ProductName', '@item.Category?.Id', '@item.UnitPrice', '@item.StockLevel', '@item.Description')">
                                         <i class="fa fa-edit fa-sm"></i>
                                     </a>
                                 </td>
@@ -100,14 +130,14 @@
     </div>
 </div>
 
-@section Scripts{
+@section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script>
         $(document).ready(function () {
             $("#categoryTable").DataTable();
         });
-       
+
 
         $("#submit").click(function () {
             var data = $("#FormId").serialize();
@@ -115,14 +145,14 @@
                 title: 'Are you sure?', text: 'Do you want to submit this record!', type: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, submit it!'
             }).then(function () {
                 $.ajax({
-                    url: '@Url.Action("Index", "Category")',
+                    url: '@Url.Action("Index", "Product")',
                     type: 'POST',
                     data: data
-                }).done(function (){
-                    Swal.fire('Success!', 'Data Saved Successfully', 'success').then(function(){
+                }).done(function () {
+                    Swal.fire('Success!', 'Data Saved Successfully', 'success').then(function () {
                         location.reload();
                     })
-                }).fail(function (){
+                }).fail(function () {
                     Swal.fire('Error!', 'Something Went Wrong', 'error').then(function () {
                         location.reload();
                     })
@@ -131,9 +161,12 @@
         });
 
 
-        function Edit(Id, CategoryName, Description){
+        function Edit(Id, ProductName, CategoryId, UnitPrice, StockLevel, Description) {
             $("#editId").val(Id);
-            $("#CategoryName").val(CategoryName);
+            $("#ProductName").val(ProductName);
+            $("#CategoryId").val(CategoryId);
+            $("#UnitPrice").val(UnitPrice);
+            $("#StockLevel").val(StockLevel);
             $("#Description").val(Description);
         }
 

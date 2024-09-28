@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ERPDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("db")));
 
 builder.Services.AddScoped<ICategoryServices, CategoryServices>();
+builder.Services.AddScoped<IProductServices, ProductServices>();
 
 var app = builder.Build();
 

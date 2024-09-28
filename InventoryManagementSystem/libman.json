@@ -4,7 +4,7 @@
   "libraries": [
     {
       "library": "sweetalert2@11.14.0",
-      "destination": "wwwroot/SweetAlert/sweetalert2/"
+      "destination": "wwwroot/sweetalert2/"
     }
   ]
 }

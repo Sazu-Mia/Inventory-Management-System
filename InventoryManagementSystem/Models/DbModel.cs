@@ -1,15 +1,24 @@
-﻿namespace InventoryManagementSystem.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace InventoryManagementSystem.Models
 {
-	public class Category : Base
+	public class Category
 	{
-		public string CategoryName { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
 		public string Description { get; set; }
 
 	}
 
-	public class Product : Base
+	public class Product
 	{
-		public string ProductName { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string ProductName { get; set; }
 		public int? StockLevel { get; set; }
 		public decimal? UnitPrice { get; set; }
 		public string Description { get; set; }
@@ -19,15 +28,21 @@
 
 	}
 
-	public class Supplier : Base
+	public class Supplier
 	{
-		public string SupplierName { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string SupplierName { get; set; }
 		public string ContactInfo { get; set; }
 
 	}
-	public class PurchaseOrder : Base
+	public class PurchaseOrder 
 	{
-		public DateTime? OrderDate { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public DateTime? OrderDate { get; set; }
 		public decimal? TotalAmount { get; set; }
 		public string Status { get; set; }
 
@@ -36,9 +51,12 @@
 
 	}
 
-	public class PurchaseOrderDetail : Base
+	public class PurchaseOrderDetail
 	{
-		public int? Quantity { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int? Quantity { get; set; }
 		public decimal? PricePerUnit { get; set; }
 
 		public decimal? TotalPrice { get; set; }
@@ -50,15 +68,21 @@
 		public Product Product { get; set; }
 	}
 
-	public class Customer : Base
+	public class Customer 
 	{
-		public string CustomerName { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string CustomerName { get; set; }
 		public string ContactInfo { get; set; }
 
 	}
-	public class SalesOrder : Base
+	public class SalesOrder 
 	{
-		public int SalesOrderId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int SalesOrderId { get; set; }
 		public DateTime OrderDate { get; set; }
 		public decimal TotalAmount { get; set; }
 		public string Status { get; set; }
@@ -68,9 +92,12 @@
 
 	}
 
-	public class SalesOrderDetail : Base
+	public class SalesOrderDetail 
 	{
-		public int? Quantity { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int? Quantity { get; set; }
 		public decimal? PricePerUnit { get; set; }
 
 		public decimal? TotalPrice { get; set; }

@@ -7,11 +7,109 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/InventoryManagementSystem.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    
 
-    <link href="~/SweetAlert/sweetalert2/sweetalert2.css" rel="stylesheet" />
+    @* <link href="~/SweetAlert/sweetalert2/sweetalert2.css" rel="stylesheet" /> *@
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    @* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" /> *@
 
+    <style>
+
+        body {
+            font-size: 11pt !important;
+            color: black !important;
+        }
+
+        table .btn {
+            font-size: 8pt !important;
+            padding: 3px 5px 3px 5px !important;
+        }
+
+        table th, table td {
+            /*padding: 2px 2px 2px 2px !important;*/
+            color: black !important;
+            font-weight: normal !important;
+        }
+
+        .col-form-label {
+            color: #606066 !important;
+            font-weight: normal !important;
+            padding: 0 0 0 0;
+        }
+
+        .form-control {
+            color: #606066 !important;
+            font-size: 10pt !important;
+            padding: 1px 20px 1px 8px;
+            border: 1px solid #606066;
+            height: 30px;
+        }
+
+        .dropdown-item {
+            color: sienna;
+            background: #ADD8E6 !important;
+            font-size: 13px;
+            width: 175px !important;
+            margin: 0 auto;
+            border-radius: 30px;
+            margin-bottom: 5px;
+        }
+
+            .dropdown-item .fas {
+                margin-top: 0;
+                font-size: 13px;
+            }
+
+            .dropdown-item:hover {
+                background: linear-gradient(90deg, gray 35%, #E5EEEF 100%, #364E6F 50%, #FFF29D 50%) !important;
+            }
+
+        input, select {
+            box-shadow: none !important;
+        }
+
+
+        .form-group {
+            margin-bottom: 6px !important;
+        }
+
+        @@media (max-width: 768px) {
+            #menu {
+                /* width:0 !important; */
+                overflow: hidden;
+                transition: width 0.3s ease;
+            }
+
+            #content-wrapper {
+                /* 	margin-left: 0 !important; */
+                transition: margin-left 0.3s ease;
+            }
+
+            #softLogo {
+                height: 40px !important;
+            }
+
+            #softTitle {
+                font-size: 10pt !important;
+                width: auto;
+            }
+        }
+
+        #menu .navbar-nav {
+            max-height: 500px;
+            overflow: scroll;
+        }
+
+            #menu .navbar-nav::-webkit-scrollbar {
+                width: 0; /* Remove scrollbar space */
+                background: transparent; /* Optional: just make scrollbar invisible */
+            }
+
+    </style>
+
+    @RenderSection("Style", required: false)
 
 </head>
 <body>
@@ -31,10 +129,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        @* <div id="page-top">
+            <div id="wrapper">
+                <div id="menu" style="position: fixed; overflow: hidden; height: 100%; width: 238px; top: 0; left: 0; z-index: 0; padding-top: 65px;">
+                    <ul class="navbar-nav sidebar sidebar-dark accordion" style="font-weight: bolder; background:#0f5731;" id="accordionSidebar">
+                        <li class="nav-item" id="menu_dashboard">
+                            <a class="nav-link" href="/HRPMSEmployee/Dashboard/HRDashboard" id="HomeIcon1">
+                                <i class="fas fa-fw fa-home"></i>
+                                <span style="color:white;" id="dashboard">Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> *@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -50,10 +165,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    @* <script src="~/"></script> *@
+    
 
-    <script src="~/SweetAlert/sweetalert2/sweetalert2.min.js"></script>
-
-        @* <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> *@
 
 
     @await RenderSectionAsync("Scripts", required: false)

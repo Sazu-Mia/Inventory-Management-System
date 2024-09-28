@@ -24,14 +24,22 @@ namespace InventoryManagementSystem.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Index([FromForm] CategoryVM model)
 		{
-			var data = new Category
+			try
 			{
-				Id = Convert.ToInt32(model.editId),
-				CategoryName = model.CategoryName,
-				Description = model.Description
-			};
-			await _categoryServices.SaveCategory(data);
-			return RedirectToAction("Index");
+                var data = new Category
+                {
+                    Id = Convert.ToInt32(model.editId),
+                    CategoryName = model.CategoryName,
+                    Description = model.Description
+                };
+                await _categoryServices.SaveCategory(data);
+                return Json(true);
+            }
+			catch (Exception ex)
+			{
+
+				return Json(false);
+			}
 		}
 	}
 }
