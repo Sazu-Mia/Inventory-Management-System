@@ -12,7 +12,10 @@ namespace InventoryManagementSystem.ViewModels
         public decimal? UnitPrice { get; set; }
 
         public int? CategoryId { get; set; }
+        public string SupplierName { get; set; }
+        public string ContactInfo { get; set; }
         public IEnumerable<Category> categories { get; set; }
 		public IEnumerable<Product> products { get; set; }
+		public IEnumerable<Supplier> suppliers { get; set; }
 	}
 }

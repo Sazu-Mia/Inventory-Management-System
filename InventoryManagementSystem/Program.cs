@@ -12,6 +12,7 @@ builder.Services.AddDbContext<ERPDbContext>(o => o.UseSqlServer(builder.Configur
 
 builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
+builder.Services.AddScoped<ISupplierServices, SupplierServices>();
 
 var app = builder.Build();
 

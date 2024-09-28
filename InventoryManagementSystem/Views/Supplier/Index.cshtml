@@ -24,7 +24,7 @@
 
 <div class="card" style="width: 100%;">
     <div class="card-header  d-flex flex-row align-items-center justify-content-between">
-        <h5 class="m-0 font-weight-bold text-primary"> Product Information</h5>
+        <h5 class="m-0 font-weight-bold text-primary"> Supplier Information</h5>
         <a class='btn btn-info mr-4' style="float:right" data-toggle='tooltip' title='Go Back' onclick="history.back()"><i class="fas fa-angle-double-left"> <span style="">Back</span></i></a>
 
     </div>
@@ -38,41 +38,19 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group row">
-                            <label for="ProductName" class="col-sm-12 col-form-label">Product Name</label>
+                            <label for="SupplierName" class="col-sm-12 col-form-label">Supplier Name</label>
                             <div class="col-sm-12">
-                                <input type="text" data-parsley-required="ture" class="form-control" name="ProductName" id="ProductName">
+                                <input type="text" data-parsley-required="ture" class="form-control" name="SupplierName" id="SupplierName">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="UnitPrice" class="col-sm-12 col-form-label">Unit Price</label>
-                            <div class="col-sm-12">
-                                <input type="text" data-parsley-required="ture" class="form-control" name="UnitPrice" id="UnitPrice">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="branchNamebn" class="col-sm-12 col-form-label">Description</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="Description" id="Description">
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="col-6">
+                        
                         <div class="form-group row">
-                            <label for="CategoryId" class="col-sm-12 col-form-label">Category</label>
+                            <label for="ContactInfo" class="col-sm-12 col-form-label">Contact Info</label>
                             <div class="col-sm-12">
-                                <select class="form-control" name="CategoryId" id="CategoryId">
-                                    <option value="0">Select</option>
-                                    @foreach(var item in Model.categories)
-                                    {
-                                        <option value="@item.Id">@item.CategoryName</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="StockLevel" class="col-sm-12 col-form-label">Stock</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="StockLevel" id="StockLevel">
+                                <input type="text" class="form-control" name="ContactInfo" id="ContactInfo">
                             </div>
                         </div>
                     </div>
@@ -92,32 +70,26 @@
         <div class="card mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Supplier List</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
                 <table class="table table-striped" id="categoryTable">
                     <thead>
                         <tr>
-                            <th>Product Name</th>
-                            <th>Category</th>
-                            <th>Unit Price</th>
-                            <th>Stock</th>
-                            <th>Description</th>
-
+                            <th>Supper Name</th>
+                            <th>Contact Info</th>
                             <th>Action</th>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.products)
+                        @foreach (var item in Model.suppliers)
                         {
                             <tr>
-                                <td>@item.ProductName</td>
-                                <td>@item.Category?.CategoryName</td>
-                                <td>@item.UnitPrice</td>
-                                <td>@item.StockLevel</td>
-                                <td>@item.Description</td>
+                                <td>@item.SupplierName</td>
+                                <td>@item.ContactInfo</td>
+
                                 <td>
-                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.ProductName', '@item.Category?.Id', '@item.UnitPrice', '@item.StockLevel', '@item.Description')">
+                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.SupplierName', '@item.ContactInfo')">
                                         <i class="fa fa-edit fa-sm"></i>
                                     </a>
                                 </td>
@@ -145,7 +117,7 @@
                 title: 'Are you sure?', text: 'Do you want to submit this record!', type: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, submit it!'
             }).then(function () {
                 $.ajax({
-                    url: '@Url.Action("Index", "Product")',
+                    url: '@Url.Action("Index", "Supplier")',
                     type: 'POST',
                     data: data
                 }).done(function () {
@@ -161,13 +133,10 @@
         });
 
 
-        function Edit(Id, ProductName, CategoryId, UnitPrice, StockLevel, Description) {
+        function Edit(Id, SupplierName, ContactInfo) {
             $("#editId").val(Id);
-            $("#ProductName").val(ProductName);
-            $("#CategoryId").val(CategoryId);
-            $("#UnitPrice").val(UnitPrice);
-            $("#StockLevel").val(StockLevel);
-            $("#Description").val(Description);
+            $("#SupplierName").val(SupplierName);
+            $("#ContactInfo").val(ContactInfo);
         }
 
     </script>
