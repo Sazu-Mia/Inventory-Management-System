@@ -1,7 +1,7 @@
 ﻿@model CategoryVM
 
 @{
-    ViewData["TitleMD"] = "Purchase Order";
+    ViewData["TitleMD"] = "Sales Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -38,45 +38,34 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group row">
-                            <label for="PurchaseOrderId" class="col-sm-12 col-form-label">Purchase Order No</label>
+                            <label for="TotalAmount" class="col-sm-12 col-form-label">Sales Order No</label>
                             <div class="col-sm-12">
-                                <select class="form-control" name="PurchaseOrderId" id="PurchaseOrderId">
-                                    <option value="0">Select</option>
-                                    @foreach(var item in Model.purchaseOrders)
-                                    {
-                                        <option value="@item.Id">@item.PurchaseOrderNo</option>
-                                    }
-                                </select>
+                                <input type="text" class="form-control" name="SalesOrderNo" id="SalesOrderNo" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="Quantity" class="col-sm-12 col-form-label">Quantity</label>
+                            <label for="OrderDate" class="col-sm-12 col-form-label">Order Date</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" name="Quantity" id="Quantity">
+                                <input type="text" class="form-control" name="OrderDate" id="OrderDate" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
 
                         <div class="form-group row">
-                            <label for="productId" class="col-sm-12 col-form-label">Product</label>
+                            <label for="CustomerId" class="col-sm-12 col-form-label">Customer Name</label>
                             <div class="col-sm-12">
-                                <select class="form-control" name="productId" id="productId">
+                                <select class="form-control" name="CustomerId" id="CustomerId">
                                     <option value="0">Select</option>
-                                    @foreach (var item in Model.products)
+                                    @foreach (var item in Model.customers)
                                     {
-                                        <option value="@item.Id">@item.ProductName</option>
+                                        <option value="@item.Id">@item.CustomerName</option>
                                     }
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="PricePerUnit" class="col-sm-12 col-form-label">Price Per Unit</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="PricePerUnit" id="PricePerUnit">
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -96,31 +85,27 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Product Purchase List</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Sales Order List</h6>
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="categoryTable">
                     <thead>
                         <tr>
-                            <th>Purchase Order No</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price Per Unit</th>
-                            <th>Total Amount</th>
+                            <th>Sales Order No</th>
+                            <th>Order Date</th>
+                            <th>Customer Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.orderDetails)
+                        @foreach (var item in Model.salesOrders)
                         {
                             <tr>
-                                <td>@item.PurchaseOrder?.PurchaseOrderNo</td>
-                                <td>@item.Product?.ProductName</td>
-                                <td>@item.Quantity</td>
-                                <td>@item.PricePerUnit</td>
-                                <td>@item.TotalPrice</td>
+                                <td>@item.SalesOrderNo</td>
+                                <td>@item.OrderDate?.ToString("dd-MM-yyyy")</td>
+                                <td>@item.Customer?.CustomerName</td>
                                 <td>
-                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.PurchaseOrder?.Id', '@item.Product?.Id', '@item.Quantity', '@item.PricePerUnit', '@item.TotalPrice')">
+                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.SalesOrderNo', '@item.OrderDate?.ToString("dd-MM-yyyy")', '@item.Customer?.Id')">
                                         <i class="fa fa-edit fa-sm"></i>
                                     </a>
                                 </td>
@@ -144,7 +129,7 @@
             console.log($.ui);
             console.log($.fn.datepicker);
 
-            Common.Ajax('GET', 'PurchaseOrder/GetMaxPurchaseOrderId', [], 'json', ajaxPurchaseNo, false);
+            Common.Ajax('GET', 'SalesOrder/GetMaxSalesOrderId', [], 'json', ajaxSalesNo, false);
 
             $("#categoryTable").DataTable();
 
@@ -157,9 +142,9 @@
             });
         });
 
-        function ajaxPurchaseNo(res) {
+        function ajaxSalesNo(res) {
             console.log(res);
-            $("#PurchaseOrderNo").val(res);
+            $("#SalesOrderNo").val(res);
         }
 
         $("#submit").click(function () {
@@ -175,7 +160,7 @@
             }).then(function (result) {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '@Url.Action("PurchaseProduct", "PurchaseOrder")',
+                        url: '@Url.Action("Index", "SalesOrder")',
                         type: 'POST',
                         data: data,
                         success: function (res) {
@@ -194,12 +179,11 @@
             });
         });
 
-        function Edit(Id, PurchaseOrderId, productId, Quantity, PricePerUnit) {
+        function Edit(Id, SalesOrderNo, OrderDate, CustomerId) {
             $("#editId").val(Id);
-            $("#PurchaseOrderId").val(PurchaseOrderId);
-            $("#productId").val(productId);
-            $("#Quantity").val(Quantity);
-            $("#PricePerUnit").val(PricePerUnit);
+            $("#SalesOrderNo").val(SalesOrderNo);
+            $("#OrderDate").val(OrderDate);
+            $("#CustomerId").val(CustomerId);
         }
     </script>
 }

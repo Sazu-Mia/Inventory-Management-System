@@ -1,7 +1,7 @@
 ﻿@model CategoryVM
 
 @{
-    ViewData["TitleMD"] = "Purchase Order";
+    ViewData["TitleMD"] = "Sales";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -38,13 +38,13 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group row">
-                            <label for="PurchaseOrderId" class="col-sm-12 col-form-label">Purchase Order No</label>
+                            <label for="PurchaseOrderId" class="col-sm-12 col-form-label">Sales Order No</label>
                             <div class="col-sm-12">
-                                <select class="form-control" name="PurchaseOrderId" id="PurchaseOrderId">
+                                <select class="form-control" name="SalesOrderId" id="SalesOrderId">
                                     <option value="0">Select</option>
-                                    @foreach(var item in Model.purchaseOrders)
+                                    @foreach (var item in Model.salesOrders)
                                     {
-                                        <option value="@item.Id">@item.PurchaseOrderNo</option>
+                                        <option value="@item.Id">@item.SalesOrderNo</option>
                                     }
                                 </select>
                             </div>
@@ -102,7 +102,7 @@
                 <table class="table table-striped" id="categoryTable">
                     <thead>
                         <tr>
-                            <th>Purchase Order No</th>
+                            <th>Sales Order No</th>
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Price Per Unit</th>
@@ -111,16 +111,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.orderDetails)
+                        @foreach (var item in Model.salesOrderDetails)
                         {
                             <tr>
-                                <td>@item.PurchaseOrder?.PurchaseOrderNo</td>
+                                <td>@item.SalesOrder?.SalesOrderNo</td>
                                 <td>@item.Product?.ProductName</td>
                                 <td>@item.Quantity</td>
                                 <td>@item.PricePerUnit</td>
                                 <td>@item.TotalPrice</td>
                                 <td>
-                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.PurchaseOrder?.Id', '@item.Product?.Id', '@item.Quantity', '@item.PricePerUnit', '@item.TotalPrice')">
+                                    <a class="btn btn-success" onclick="Edit('@item.Id', '@item.SalesOrder?.Id', '@item.Product?.Id', '@item.Quantity', '@item.PricePerUnit', '@item.TotalPrice')">
                                         <i class="fa fa-edit fa-sm"></i>
                                     </a>
                                 </td>
@@ -144,7 +144,7 @@
             console.log($.ui);
             console.log($.fn.datepicker);
 
-            Common.Ajax('GET', 'PurchaseOrder/GetMaxPurchaseOrderId', [], 'json', ajaxPurchaseNo, false);
+            Common.Ajax('GET', 'Sales/GetMaxSalesOrderId', [], 'json', ajaxPurchaseNo, false);
 
             $("#categoryTable").DataTable();
 
@@ -159,7 +159,7 @@
 
         function ajaxPurchaseNo(res) {
             console.log(res);
-            $("#PurchaseOrderNo").val(res);
+            $("#SalesOrderId").val(res);
         }
 
         $("#submit").click(function () {
@@ -175,7 +175,7 @@
             }).then(function (result) {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '@Url.Action("PurchaseProduct", "PurchaseOrder")',
+                        url: '@Url.Action("SalesProduct", "SalesOrder")',
                         type: 'POST',
                         data: data,
                         success: function (res) {
@@ -194,9 +194,9 @@
             });
         });
 
-        function Edit(Id, PurchaseOrderId, productId, Quantity, PricePerUnit) {
+        function Edit(Id, SalesOrderId, productId, Quantity, PricePerUnit) {
             $("#editId").val(Id);
-            $("#PurchaseOrderId").val(PurchaseOrderId);
+            $("#SalesOrderId").val(SalesOrderId);
             $("#productId").val(productId);
             $("#Quantity").val(Quantity);
             $("#PricePerUnit").val(PricePerUnit);

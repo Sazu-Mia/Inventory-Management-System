@@ -30,13 +30,18 @@ namespace InventoryManagementSystem.ViewModels
         public decimal? TotalPrice { get; set; }
 
         public int? PurchaseOrderId { get; set; }
+        public int? SalesOrderId { get; set; }
 
         public int? ProductId { get; set; }
+
+        public int? CustomerId { get; set; }
         public IEnumerable<Category> categories { get; set; }
 		public IEnumerable<Product> products { get; set; }
 		public IEnumerable<Supplier> suppliers { get; set; }
 		public IEnumerable<Customer> customers { get; set; }
 		public IEnumerable<PurchaseOrder> purchaseOrders { get; set; }
 		public IEnumerable<PurchaseOrderDetail> orderDetails { get; set; }
+        public IEnumerable<SalesOrder> salesOrders { get; set; }
+        public IEnumerable<SalesOrderDetail> salesOrderDetails { get; set; }
 	}
 }
