@@ -1,3 +1,5 @@
+using DinkToPdf.Contracts;
+using DinkToPdf;
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Services;
 using InventoryManagementSystem.Services.Interface;
@@ -16,6 +18,9 @@ builder.Services.AddScoped<ISupplierServices, SupplierServices>();
 builder.Services.AddScoped<ICustomerServices, CustomerServices>();
 builder.Services.AddScoped<IPurchaseOrderServices, PurchaseOrderServices>();
 builder.Services.AddScoped<ISalesOrderServices, SalesOrderServices>();
+
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
 
 var app = builder.Build();
 

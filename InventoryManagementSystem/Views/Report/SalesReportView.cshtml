@@ -1,0 +1,75 @@
+﻿@model CategoryVM
+@{
+    ViewData["Title"] = "Sales Report";
+    Layout = "~/Views/Shared/_PrintView.cshtml";
+}
+
+@section Style {
+    <style>
+
+        .print-card-body {
+            width: 100%;
+            padding-bottom: 10px;
+        }
+
+        .vartical-table th {
+            width: 20%;
+        }
+
+        .vartical-table td {
+            width: 20%;
+        }
+
+        .table td, .table th {
+            padding: .2rem;
+            font-size: 12px;
+        }
+
+    </style>
+}
+
+<div class="print-card" style="width: 100%;">
+    <div class="print-card-body">
+
+        <div class="container-fluid">
+            <div class="row" style="padding-top:0px;">
+                <div class="col-2">
+                    @* <img src="/EmpImages/@Model.companies.FirstOrDefault().filePath" alt="OPUS ERP" style="height:80px;" /> *@
+                </div>
+                <div class="col-8">
+                    <div style="color:black;text-align:center;">
+                        <h3 style="font-size:18px;">OnnoRokom Projukti Limited.</h3>
+                        <h3 style="font-size:12px;">HEAD OFFICE: DHAKA</h3>
+                        <h3 style="font-size:12px;">Procurement Department</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container-fluid" style="color:black;font-size:12px;">
+          
+           
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Branch Name</th>
+                       
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                  
+                </tbody>
+               
+            </table>
+            
+
+
+        </div>
+    </div>
+</div>
+
+
