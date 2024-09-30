@@ -43,5 +43,19 @@ namespace InventoryManagementSystem.ViewModels
 		public IEnumerable<PurchaseOrderDetail> orderDetails { get; set; }
         public IEnumerable<SalesOrder> salesOrders { get; set; }
         public IEnumerable<SalesOrderDetail> salesOrderDetails { get; set; }
+        public IEnumerable<SalesOrderVM> salesOrderVMs { get; set; }
 	}
+
+    public class SalesOrderVM
+    {
+       public string SalesOrderNo { get; set; }
+       public string SupplierName { get; set; }
+       public string PurchaseOrderNo { get; set; }
+       public string CustomerName { get; set; }
+       public string ProductName { get; set; }
+       public DateTime?  OrderDate { get; set; }
+       public int? Quantity { get; set; }
+       public decimal?  PricePerUnit { get; set; }
+        public decimal? TotalPrice { get; set; }
+    }
 }

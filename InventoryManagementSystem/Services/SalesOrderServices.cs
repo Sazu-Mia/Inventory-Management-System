@@ -1,5 +1,6 @@
 ﻿using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Services.Interface;
+using InventoryManagementSystem.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagementSystem.Services
@@ -61,6 +62,68 @@ namespace InventoryManagementSystem.Services
         public async Task<IEnumerable<SalesOrderDetail>> GetAllSalesOrderDetail()
         {
             return await _context.salesOrderDetails.Include(x => x.SalesOrder).Include(x => x.Product).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IEnumerable<SalesOrderVM>> GetSalesDetailByDate(DateTime? fromDate, DateTime? toDate)
+        {
+            try
+            {
+                var fDate = fromDate?.ToString("yyyy-MM-dd");
+                var ftDate = toDate?.ToString("yyyy-MM-dd");
+
+                var result = (from s in _context.salesOrders
+                              join c in _context.customers on s.CustomerId equals c.Id
+                              join sd in _context.salesOrderDetails on s.Id equals sd.SalesOrderId
+                              join p in _context.products on sd.ProductId equals p.Id
+                              where s.OrderDate >= Convert.ToDateTime(fDate) && s.OrderDate <= Convert.ToDateTime(ftDate)
+                              select new SalesOrderVM
+                              {
+                                  SalesOrderNo = s.SalesOrderNo ?? "",
+                                  CustomerName = c.CustomerName ?? "",
+                                  ProductName = p.ProductName ?? "",
+                                  OrderDate = s.OrderDate,
+                                  Quantity = sd.Quantity,
+                                  PricePerUnit = sd.PricePerUnit,
+                                  TotalPrice = sd.TotalPrice
+                              }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<SalesOrderVM>> GetPurchaseDetailByDate(DateTime? fromDate, DateTime? toDate)
+        {
+            try
+            {
+                var fDate = fromDate?.ToString("yyyy-MM-dd");
+                var ftDate = toDate?.ToString("yyyy-MM-dd");
+
+                var result = (from s in _context.purchaseOrders
+                              join c in _context.suppliers on s.SupplierId equals c.Id
+                              join sd in _context.purchaseOrderDetails on s.Id equals sd.PurchaseOrderId
+                              join p in _context.products on sd.ProductId equals p.Id
+                              where s.OrderDate >= Convert.ToDateTime(fDate) && s.OrderDate <= Convert.ToDateTime(ftDate)
+                              select new SalesOrderVM
+                              {
+                                  PurchaseOrderNo = s.PurchaseOrderNo ?? "",
+                                  SupplierName = c.SupplierName ?? "",
+                                  ProductName = p.ProductName ?? "",
+                                  OrderDate = s.OrderDate,
+                                  Quantity = sd.Quantity,
+                                  PricePerUnit = sd.PricePerUnit,
+                                  TotalPrice = sd.TotalPrice
+                              }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using InventoryManagementSystem.Models;
+using InventoryManagementSystem.ViewModels;
 
 namespace InventoryManagementSystem.Services.Interface
 {
@@ -9,5 +10,7 @@ namespace InventoryManagementSystem.Services.Interface
         Task<int?> GetMaxSalesOrderId();
         Task<int> SaveSalesOrderDetail(SalesOrderDetail salesOrderDetail);
         Task<IEnumerable<SalesOrderDetail>> GetAllSalesOrderDetail();
+        Task<IEnumerable<SalesOrderVM>> GetSalesDetailByDate(DateTime? fromDate, DateTime? toDate);
+        Task<IEnumerable<SalesOrderVM>> GetPurchaseDetailByDate(DateTime? fromDate, DateTime? toDate);
     }
 }

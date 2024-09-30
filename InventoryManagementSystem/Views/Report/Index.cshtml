@@ -1,0 +1,99 @@
+﻿@model CategoryVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card" style="width: 100%;">
+    <div class="card-header d-flex flex-row align-items-center justify-content-between">
+        <h5 class="m-0 font-weight-bold text-primary">Report</h5>
+        <a class='btn btn-info mr-4' style="float:right" data-toggle='tooltip' title='Go Back' onclick="history.back()">
+            <i class="fas fa-angle-double-left"></i><span> Back</span>
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="form-group row">
+                        <label for="toDate" class="col-sm-3 col-form-label">Report By</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="report" id="report">
+                                <option value="0">Select</option>
+                                <option value="1">Sales Report</option>
+                                <option value="2">Purchase Report</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                    <label for="fromDate" class="col-sm-3 col-form-label">From Date</label>
+                        <div class="col-sm-9">
+                        <input type="text" class="form-control" name="fromDate" id="fromDate" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="toDate" class="col-sm-3 col-form-label">To Date</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="toDate" id="toDate" readonly>
+                        </div>
+                    </div>
+                </div>
+               
+               
+            </div>
+
+            <hr>
+
+            <button type="button" onclick="printData()" class="btn btn-success" style="float:right; margin-top:5px;" data-toggle='tooltip' title='Save'>
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#fromDate').datepicker({
+                dateFormat: "dd-M-yy",
+                showAnim: "scale",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1940:2030"
+            });
+
+            $('#toDate').datepicker({
+                dateFormat: "dd-M-yy",
+                showAnim: "scale",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1940:2030"
+            });
+        });
+
+        function printData() {
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+
+            var report = $("#report :selected").val();
+
+            if(report == 1){
+
+                window.open('/Report/SalesReportPDF?fromDate=' + fromDate + "&toDate=" + toDate, '_blank');
+
+            }
+            else if(report == 2){
+                window.open('/Report/PurchaseReportPDF?fromDate=' + fromDate + "&toDate=" + toDate, '_blank');
+            }
+
+           
+        }
+    </script>
+}
